@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="master.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+  </head>
+  <body>
+    <div id="root">
+      <div class="logo">
+        <img :src="linkimg" alt="">
+        <h1>{{message}}</h1>
+      </div>
+      <div class="lista">
+        <ul class="todos">
+          <li v-for= "todo in todosComputed">
+            <span
+            class="title"
+            v-if="todo.status != 'edit'"
+            :class="(todo.status == 'done') ? 'barrato' : ''">
+            {{ todo.title }}</span>
+            <input
+            class="edit_mode"
+            v-model="textedit"
+            v-if="todo.status == 'edit'"
+            @keyup.enter="endEditing(todo)"
+            type="text">
+            <span
+            v-if="todo.status != 'done'"
+            class="check"
+            @click="check(todo)"
+            ><i class="fas fa-check"></i></span>
+            <span
+            v-if="todo.status != 'done'"
+            @click="edit(todo)"
+            class="edit"
+            ><i class="fas fa-edit"></i></span>
+            <span
+            v-if="todo.status == 'done'"
+            class="delete"
+            @click="remove(todo)"
+            ><i class="fas fa-trash"></i></span>
+          </li>
+        </ul>
+        <input
+        v-model="inputext"
+        class="write"
+        placeholder="Inserisci un elemento della lista"
+        type="text"
+        @keyup.enter="add">
+      </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <script src="./main.js" charset="utf-8"></script>
+  </body>
+</html>
